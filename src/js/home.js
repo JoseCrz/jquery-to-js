@@ -48,6 +48,12 @@
     $modal.style.animation = 'modalIn .8s forwards'
   }
 
+  const setAttributes = ($element, attributes = {}) => {
+    for (let attribute in attributes) {
+      $element.setAttribute(attribute, attributes[attribute])
+    }
+  }
+
   $hideModal.addEventListener('click', () => {
     $overlay.classList.remove('active')
     $modal.style.animation = 'modalOut .8s forwards'
@@ -62,6 +68,13 @@
   $form.addEventListener('submit', event => {
     event.preventDefault()
     $home.classList.add('search-active')
+    const $loader = document.createElement('img')
+    setAttributes($loader, {
+      src: 'src/images/loader.gif',
+      height: 50,
+      width: 50,
+    })
+    $featuringContainer.append($loader)
   })
 
   const grassPokemon = await getPokemons('grass')
