@@ -212,15 +212,13 @@ body {
   transform: scale(1.1)
 }
 */
-.primaryPlaylistItem-image {
+.primaryPokemonlistItem-image {
 }
 
-.primaryPlaylistItem img {
-  width: 170px;
-  height: 256px;
+.primaryPokemonlistItem img {
   object-fit: cover;
 }
-.primaryPlaylistItem-title {
+.primaryPokemonlistItem-title {
   margin: 5px 0;
   color: #44546B;
   font-size: 14px;
