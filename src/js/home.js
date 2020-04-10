@@ -89,6 +89,19 @@
     })
   }
 
+  const getData = async type => {
+    let pokemonList
+    if(localStorage.getItem(type)) {
+      pokemonList = JSON.parse(localStorage.getItem(type))
+      console.log('Not requested')
+    } else {
+      pokemonList = await getPokemons(type)
+      localStorage.setItem(type, JSON.stringify(pokemonList))
+      console.log('Requested')
+    }
+    return pokemonList
+  }
+
   $hideModal.addEventListener('click', () => {
     $overlay.classList.remove('active')
     $modal.style.animation = 'modalOut .8s forwards'
@@ -120,8 +133,7 @@
     $featuringContainer.insertAdjacentHTML('beforeend', featuring)
   })
 
-  const grassPokemon = await getPokemons('grass')
-  localStorage.setItem('grass', JSON.stringify(grassPokemon))
+  const grassPokemon = await getData('grass')
   document.querySelector('#grass .loader').style.display='none'
   grassPokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
@@ -129,8 +141,7 @@
     addImageFadeIn($grassContainer)
   })
 
-  const firePokemon = await getPokemons('fire')
-  localStorage.setItem('fire', JSON.stringify(firePokemon))
+  const firePokemon = await getData('fire')
   document.querySelector('#fire .loader').style.display='none'
   firePokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
@@ -138,8 +149,7 @@
     addImageFadeIn($fireContainer)
   })
 
-  const waterPokemon = await getPokemons('water')
-  localStorage.setItem('water', JSON.stringify(waterPokemon))
+  const waterPokemon = await getData('water')
   document.querySelector('#water .loader').style.display='none'
   waterPokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
