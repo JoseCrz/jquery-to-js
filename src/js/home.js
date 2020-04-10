@@ -44,12 +44,24 @@
   }
 
   const grassPokemon = await getPokemons('grass')
+  document.querySelector('#grass .loader').style.display='none'
   grassPokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.imageUrl)
-    const html = document.implementation.createHTMLDocument()
-    html.body.innerHTML = HTMLString
-    $grassContainer.append(html.body.children[0])
+    $grassContainer.insertAdjacentHTML('beforeend',HTMLString)
   })
-  // grassPokemon.forEach(pokemon => console.log(pokemon.name))
+
+  const firePokemon = await getPokemons('fire')
+  document.querySelector('#fire .loader').style.display='none'
+  firePokemon.forEach(pokemon => {
+    const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.imageUrl)
+    $fireContainer.insertAdjacentHTML('beforeend',HTMLString)
+  })
+
+  const waterPokemon = await getPokemons('water')
+  document.querySelector('#water .loader').style.display='none'
+  waterPokemon.forEach(pokemon => {
+    const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.imageUrl)
+    $waterContainer.insertAdjacentHTML('beforeend',HTMLString)
+  })
 
 })()
