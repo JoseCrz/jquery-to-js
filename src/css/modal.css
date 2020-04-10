@@ -13,7 +13,7 @@
   will-change: transform;
 }
 .modal-btn.primary {
-  background: #7dc800;
+  background: var(--gradient);
 }
 .modal-btn.warning {
   background: #ff463b;

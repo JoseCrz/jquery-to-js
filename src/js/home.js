@@ -43,6 +43,27 @@
     )
   }
 
+  const showModal = () => {
+    $overlay.classList.add('active')
+    $modal.style.animation = 'modalIn .8s forwards'
+  }
+
+  $hideModal.addEventListener('click', () => {
+    $overlay.classList.remove('active')
+    $modal.style.animation = 'modalOut .8s forwards'
+  })
+
+  $home.addEventListener('click', event => {
+    if (event.target.tagName === 'IMG' || event.target.tagName === 'H4' ) {
+      showModal()
+    }
+  })
+
+  $form.addEventListener('submit', event => {
+    event.preventDefault()
+    $home.classList.add('search-active')
+  })
+
   const grassPokemon = await getPokemons('grass')
   document.querySelector('#grass .loader').style.display='none'
   grassPokemon.forEach(pokemon => {
