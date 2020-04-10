@@ -1,22 +1,16 @@
-// ? XMLHttpRequest
 
-// * jQuery
-$.ajax('https://randomuser.me/api/', {
-  method: 'GET',
-  success: function(data) {
-    console.log('[jQuery]', data.results[0])
-  },
-  error: function(error) {
-    console.log('[jQuery]', error)
+(async function movies () {
+  const getMovies = async genre => {
+    const url = `https://yts.mx/api/v2/list_movies.json?genre=${genre}/`
+
+    const response = await fetch(url)
+    const data = await response.json()
+    const movies = data.data
+    return movies
   }
-})
 
-// * Vanilla
-fetch('https://randomuser.me/api/')
-.then(response => {
-  return response.json()
-})
-.then(data => {
-  console.log('[Vanilla]', data.results[0])
-})
-.catch(error => console.log('[Vanilla]', error))
+  const actionMovies = await getMovies('action')
+  const terrorMovies = await getMovies('terror')
+  console.log("movies -> terrorMovies", terrorMovies)
+  console.log("movies -> actionMovies", actionMovies)
+})()
