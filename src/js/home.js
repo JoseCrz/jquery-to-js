@@ -121,7 +121,7 @@
   })
 
   const grassPokemon = await getPokemons('grass')
-
+  localStorage.setItem('grass', JSON.stringify(grassPokemon))
   document.querySelector('#grass .loader').style.display='none'
   grassPokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
@@ -130,6 +130,7 @@
   })
 
   const firePokemon = await getPokemons('fire')
+  localStorage.setItem('fire', JSON.stringify(firePokemon))
   document.querySelector('#fire .loader').style.display='none'
   firePokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
@@ -138,6 +139,7 @@
   })
 
   const waterPokemon = await getPokemons('water')
+  localStorage.setItem('water', JSON.stringify(waterPokemon))
   document.querySelector('#water .loader').style.display='none'
   waterPokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
