@@ -43,6 +43,20 @@
     )
   }
 
+  const generateFeaturingTemplate = (imageUrl, name) => {
+    return (
+      `<div class="featuring">
+        <div class="featuring-image">
+          <img src="${imageUrl}" alt="">
+        </div>
+        <div class="featuring-content">
+          <p class="featuring-title">Pokémon found</p>
+          <p class="featuring-album">${name}</p>
+        </div>
+      </div>`
+    )
+  }
+
   const showModal = () => {
     $overlay.classList.add('active')
     $modal.style.animation = 'modalIn .8s forwards'
@@ -65,7 +79,7 @@
     }
   })
 
-  $form.addEventListener('submit', event => {
+  $form.addEventListener('submit', async event => {
     event.preventDefault()
     $home.classList.add('search-active')
     const $loader = document.createElement('img')
@@ -75,6 +89,13 @@
       width: 50,
     })
     $featuringContainer.append($loader)
+    const formData = new FormData($form)
+    const pokemonName = formData.get('name')
+    const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
+    const pokemon = await data.json()
+    const featuring = generateFeaturingTemplate(pokemon.sprites.front_default, pokemon.name)
+    document.querySelector('#featuring img').style.display = 'none'
+    $featuringContainer.insertAdjacentHTML('beforeend', featuring)
   })
 
   const grassPokemon = await getPokemons('grass')
