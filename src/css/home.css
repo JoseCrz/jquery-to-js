@@ -250,7 +250,7 @@ body {
 
 
 .fadeIn {
-  animation: 1000ms fadeIn;
+  animation: 3s fadeIn;
 }
 
 @keyframes fadeIn {

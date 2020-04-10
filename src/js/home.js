@@ -83,6 +83,12 @@
     }
   }
 
+  const addImageFadeIn = $element => {
+    $element.lastElementChild.querySelector('img').addEventListener('load', event => {
+      event.srcElement.classList.add('fadeIn')
+    })
+  }
+
   $hideModal.addEventListener('click', () => {
     $overlay.classList.remove('active')
     $modal.style.animation = 'modalOut .8s forwards'
@@ -120,6 +126,7 @@
   grassPokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
     $grassContainer.insertAdjacentHTML('beforeend',HTMLString)
+    addImageFadeIn($grassContainer)
   })
 
   const firePokemon = await getPokemons('fire')
@@ -127,6 +134,7 @@
   firePokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
     $fireContainer.insertAdjacentHTML('beforeend',HTMLString)
+    addImageFadeIn($fireContainer)
   })
 
   const waterPokemon = await getPokemons('water')
@@ -134,6 +142,7 @@
   waterPokemon.forEach(pokemon => {
     const HTMLString = generatePokemonTemplate(pokemon.name, pokemon.frontSprite)
     $waterContainer.insertAdjacentHTML('beforeend',HTMLString)
+    addImageFadeIn($waterContainer)
   })
 
 })()
